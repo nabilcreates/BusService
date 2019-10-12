@@ -21,7 +21,20 @@ fetch("https://raw.githubusercontent.com/cheeaun/busrouter-sg/master/data/3/stop
 fetch("https://raw.githubusercontent.com/cheeaun/busrouter-sg/master/data/3/stops.json")
 .then(res => res.json())
 .then(data => {
-    fs.writeFileSync("./data/json_code_info.json", JSON.stringify(data));
+    let tempobj = [];
+    let keys = Object.keys(data);
+
+    for(let i = 0; i < keys.length; i++){
+        let BUS_STOP_NAME = data[keys[i]].name;
+        let BUS_STOP_CODE = keys[i];
+
+        tempobj.push({
+            "bus_stop_name": BUS_STOP_NAME,
+            "bus_stop_code": BUS_STOP_CODE
+        })
+    }
+
+     fs.writeFileSync("./data/object_name_code.json", JSON.stringify(tempobj));
 })
 
 fetch("https://raw.githubusercontent.com/cheeaun/busrouter-sg/master/data/3/stops.json")
