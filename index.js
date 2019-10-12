@@ -1,9 +1,13 @@
 let fetch = require("node-fetch");
 let fs = require("fs");
 
+
+// Fetch data
 fetch("https://raw.githubusercontent.com/cheeaun/busrouter-sg/master/data/3/stops.json")
 .then(res => res.json())
 .then(data => {
+
+    // Key-ify FORMAT OF DATA: JSON[BUS_STOP_CODE]
     let keys = Object.keys(data)
     let tempobj = {};
     keys.forEach(k => {
